@@ -786,10 +786,10 @@ fileprivate class TabManagerDataSource: NSObject, UICollectionViewDataSource {
         tabCell.isAccessibilityElement = true
         tabCell.accessibilityHint = NSLocalizedString("Swipe right or left with three fingers to close the tab.", comment: "Accessibility hint for tab tray's displayed tab.")
 
+        let defaultFavicon = UIImage(named: "defaultFavicon")
         if let favIcon = tab.displayFavicon {
-            tabCell.favicon.sd_setImage(with: URL(string: favIcon.url)!)
+            tabCell.favicon.sd_setImage(with: URL(string: favIcon.url), placeholderImage: defaultFavicon, options: [], completed: nil)
         } else {
-            let defaultFavicon = UIImage(named: "defaultFavicon")
             if tab.isPrivate {
                 tabCell.favicon.image = defaultFavicon
                 tabCell.favicon.tintColor = UIColor.white
