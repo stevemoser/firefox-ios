@@ -5,6 +5,9 @@
 import XCTest
 
 class DatabaseFixtureTest: BaseTestCase {
+
+    let url = top5000SitesList()
+
     func testDatabaseFixture() {
         let file = "testDatabaseFixture-browser.db"
         let arg = LaunchArguments.LoadDatabasePrefix + file
@@ -16,5 +19,22 @@ class DatabaseFixtureTest: BaseTestCase {
         navigator.browserPerformAction(.openBookMarksOption)
         let list = app.tables["Bookmarks List"].cells.count
         XCTAssertEqual(list, 1, "There should be an entry in the bookmarks list")
+    }
+
+    // This two tests should be disabled. They are only meant to generate the browserDB or check how all web sites are presented
+    func testLoadAllSites() {
+        for index in url.top5000SitesList.indices {
+            navigator.openURL(url.top5000SitesList[index])
+        }
+    }
+
+    func testLoadNumberOfSites() {
+        // For example to navigate to the 100 first top sites. This can be changed as per needs
+        let n = 2
+        let urlSlice = url.top5000SitesList.prefix(n)
+
+        for index in urlSlice.indices {
+            navigator.openURL(urlSlice[index])
+        }
     }
 }
