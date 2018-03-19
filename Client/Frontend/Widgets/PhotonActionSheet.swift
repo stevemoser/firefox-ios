@@ -503,7 +503,7 @@ private class PhotonActionSheetCell: UITableViewCell {
         titleLabel.font = DynamicFontHelper.defaultHelper.LargeSizeRegularWeightAS
         titleLabel.minimumScaleFactor = 0.8 // Scale the font if we run out of space
         titleLabel.textColor = PhotonActionSheetCellUX.LabelColor
-        titleLabel.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .vertical)
+        titleLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
         titleLabel.numberOfLines = 4
         titleLabel.adjustsFontSizeToFitWidth = true
         return titleLabel
@@ -512,7 +512,7 @@ private class PhotonActionSheetCell: UITableViewCell {
     lazy var subtitleLabel: UILabel = {
         let textLabel = UILabel()
         textLabel.font = DynamicFontHelper.defaultHelper.SmallSizeRegularWeightAS
-        textLabel.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .vertical)
+        textLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
         textLabel.minimumScaleFactor = 0.75 // Scale the font if we run out of space
         textLabel.textColor = PhotonActionSheetCellUX.LabelColor
         textLabel.numberOfLines = 3
@@ -525,7 +525,7 @@ private class PhotonActionSheetCell: UITableViewCell {
         statusIcon.contentMode = .scaleAspectFit
         statusIcon.clipsToBounds = true
         statusIcon.layer.cornerRadius = PhotonActionSheetCellUX.CornerRadius
-        statusIcon.setContentHuggingPriority(UILayoutPriorityRequired, for: .horizontal)
+        statusIcon.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
         return statusIcon
     }()
 
@@ -551,7 +551,7 @@ private class PhotonActionSheetCell: UITableViewCell {
         let disclosureIndicator = UIImageView(image: UIImage(named: "menu-Disclosure"))
         disclosureIndicator.contentMode = .scaleAspectFit
         disclosureIndicator.layer.cornerRadius = PhotonActionSheetCellUX.CornerRadius
-        disclosureIndicator.setContentHuggingPriority(UILayoutPriorityRequired, for: .horizontal)
+        disclosureIndicator.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
         return disclosureIndicator
     }()
 
@@ -590,7 +590,7 @@ private class PhotonActionSheetCell: UITableViewCell {
         // Setup our StackViews
         let textStackView = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
         textStackView.spacing = PhotonActionSheetCell.VerticalPadding
-        textStackView.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
+        textStackView.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
         textStackView.alignment = .leading
         textStackView.axis = .vertical
 
