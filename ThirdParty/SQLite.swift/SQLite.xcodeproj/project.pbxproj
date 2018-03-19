@@ -753,7 +753,7 @@
 					};
 					EE247AD21C3F04ED00AE3E12 = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0920;
 					};
 					EE247ADC1C3F04ED00AE3E12 = {
 						CreatedOnToolsVersion = 7.2;
@@ -1297,7 +1297,8 @@
 				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]" = "$(SRCROOT)/CocoaPods/iphonesimulator";
 				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator10.0]" = "$(SRCROOT)/CocoaPods/iphonesimulator-10.0";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1322,7 +1323,8 @@
 				"SWIFT_INCLUDE_PATHS[sdk=iphoneos10.0]" = "$(SRCROOT)/CocoaPods/iphoneos-10.0";
 				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]" = "$(SRCROOT)/CocoaPods/iphonesimulator";
 				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator10.0]" = "$(SRCROOT)/CocoaPods/iphonesimulator-10.0";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
