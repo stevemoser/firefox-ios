@@ -303,7 +303,7 @@ extension PhotonActionSheetProtocol {
 
         let addToWhitelist = PhotonActionSheetItem(title: Strings.TrackingProtectionDisableTitle, iconString: "menu-TrackingProtection-Off") { _ in
             UnifiedTelemetry.recordEvent(category: .action, method: .add, object: .trackingProtectionWhitelist)
-            ContentBlockerHelper.whitelist(enable: true, url: currentURL) { _ in
+            ContentBlockerHelper.whitelist(enable: true, url: currentURL) {
                 tab.reload()
             }
         }
@@ -317,7 +317,7 @@ extension PhotonActionSheetProtocol {
         }
 
         let removeFromWhitelist = PhotonActionSheetItem(title: Strings.TrackingProtectionWhiteListRemove, iconString: "menu-TrackingProtection") { _ in
-            ContentBlockerHelper.whitelist(enable: false, url: currentURL) { _ in
+            ContentBlockerHelper.whitelist(enable: false, url: currentURL) {
                 tab.reload()
             }
         }
