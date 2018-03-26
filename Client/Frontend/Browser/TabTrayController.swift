@@ -303,7 +303,7 @@ class TabTrayController: UIViewController {
         self.tabManager.removeDelegate(self)
     }
 
-    func dynamicFontChanged(_ notification: Notification) {
+    @objc func dynamicFontChanged(_ notification: Notification) {
         guard notification.name == .DynamicFontChanged else { return }
 
         self.collectionView.reloadData()
@@ -407,11 +407,11 @@ class TabTrayController: UIViewController {
     }
 
 // MARK: Selectors
-    func didClickDone() {
+    @objc func didClickDone() {
         presentingViewController!.dismiss(animated: true, completion: nil)
     }
 
-    func didClickSettingsItem() {
+    @objc func didClickSettingsItem() {
         assert(Thread.isMainThread, "Opening settings requires being invoked on the main thread")
 
         let settingsTableViewController = AppSettingsTableViewController()
@@ -425,11 +425,11 @@ class TabTrayController: UIViewController {
         present(controller, animated: true, completion: nil)
     }
 
-    func didClickAddTab() {
+    @objc func didClickAddTab() {
         openNewTab()
     }
 
-    func didTapLearnMore() {
+    @objc func didTapLearnMore() {
         let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         if let langID = Locale.preferredLanguages.first {
             let learnMoreRequest = URLRequest(url: "https://support.mozilla.org/1/mobile/\(appVersion)/iOS/\(langID)/private-browsing-ios".asURL!)
@@ -437,7 +437,7 @@ class TabTrayController: UIViewController {
         }
     }
 
-    func didTogglePrivateMode() {
+    @objc func didTogglePrivateMode() {
         let scaleDownTransform = CGAffineTransform(scaleX: 0.9, y: 0.9)
 
         let fromView: UIView
@@ -543,13 +543,13 @@ class TabTrayController: UIViewController {
 
 // MARK: - App Notifications
 extension TabTrayController {
-    func appWillResignActiveNotification() {
+    @objc func appWillResignActiveNotification() {
         if privateMode {
             collectionView.alpha = 0
         }
     }
 
-    func appDidBecomeActiveNotification() {
+    @objc func appDidBecomeActiveNotification() {
         // Re-show any components that might have been hidden because they were being displayed
         // as part of a private mode tab
         UIView.animate(withDuration: 0.2, delay: 0, options: [], animations: {
@@ -726,7 +726,7 @@ extension TabTrayController: SettingsDelegate {
 }
 
 extension TabTrayController: PhotonActionSheetProtocol {
-    func didTapDelete(_ sender: UIButton) {
+    @objc func didTapDelete(_ sender: UIButton) {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         controller.addAction(UIAlertAction(title: Strings.AppMenuCloseAllTabsTitleString, style: .default, handler: { _ in self.closeTabsForCurrentTray() }))
         controller.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Label for Cancel button"), style: .cancel, handler: nil))
