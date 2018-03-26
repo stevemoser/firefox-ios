@@ -11,9 +11,23 @@ let allDefaultTopSites = ["facebook", "youtube", "amazon", "wikipedia", "twitter
 class ActivityStreamTest: BaseTestCase {
     let TopSiteCellgroup = XCUIApplication().collectionViews.cells["TopSitesCell"]
 
+    let testWithDB = ["testActivityStreamPages"]
+    let pagesVisitediPad = "browserActivityStreamPagesiPad.db"
+    let pagesVisitediPhone = "browserActivityStreamPagesiPhone.db"
+
     override func setUp() {
+        // Test name looks like: "[Class testFunc]", parse out the function name
+        let parts = name!.replacingOccurrences(of: "]", with: "").split(separator: " ")
+        let key = String(parts[1])
+        if testWithDB.contains(key) {
+            // for the current test name, add the db fixture used
+            if iPad() {
+                launchArguments = [LaunchArguments.SkipIntro, LaunchArguments.SkipWhatsNew, LaunchArguments.LoadDatabasePrefix + pagesVisitediPad]
+            } else {
+                launchArguments = [LaunchArguments.SkipIntro, LaunchArguments.SkipWhatsNew, LaunchArguments.LoadDatabasePrefix + pagesVisitediPhone]
+            }
+        }
         super.setUp()
-        dismissFirstRunUI()
     }
 
     override func tearDown() {
@@ -335,40 +349,6 @@ class ActivityStreamTest: BaseTestCase {
 
     func testActivityStreamPages() {
         let pagecontrolButton = TopSiteCellgroup.buttons["Next Page"]
-        XCTAssertFalse(pagecontrolButton.exists, "The Page Control button must not exist. Only 5 elements should be on the page")
-
-        navigator.openURL("http://example.com")
-        waitUntilPageLoad()
-        waitForValueContains(app.textFields["url"], value: "example.com")
-        navigator.openURL("http://mozilla.org")
-        waitUntilPageLoad()
-        waitForValueContains(app.textFields["url"], value: "mozilla.org")
-        navigator.openURL("http://apple.com")
-        waitUntilPageLoad()
-        waitForValueContains(app.textFields["url"], value: "apple.com")
-        navigator.openURL("http://slack.com")
-        waitUntilPageLoad()
-        waitForValueContains(app.textFields["url"], value: "slack.com")
-
-        if iPad() {
-            // Test timeout on BB when loading these pages
-            navigator.openURL("http://cvs.com")
-            waitUntilPageLoad()
-            waitForValueContains(app.textFields["url"], value: "cvs.com")
-            navigator.openURL("http://linkedin.com")
-            waitUntilPageLoad()
-            waitForValueContains(app.textFields["url"], value: "linkedin.com")
-            navigator.openURL("http://zara.com")
-            waitUntilPageLoad()
-            waitForValueContains(app.textFields["url"], value: "zara.com")
-            navigator.openURL("http://twitter.com")
-            waitUntilPageLoad()
-            waitForValueContains(app.textFields["url"], value: "twitter.com")
-            navigator.openURL("http://instagram.com")
-            waitUntilPageLoad()
-            waitForValueContains(app.textFields["url"], value: "instagram.com")
-        }
-        navigator.goto(URLBarOpen)
         waitforExistence(pagecontrolButton)
         XCTAssert(pagecontrolButton.exists, "The Page Control button must exist")
         pagecontrolButton.tap()
