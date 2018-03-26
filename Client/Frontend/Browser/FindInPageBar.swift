@@ -3,6 +3,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 import UIKit
+import Shared
 
 protocol FindInPageBarDelegate: class {
     func findInPage(_ findInPage: FindInPageBar, didTextChange text: String)
@@ -29,12 +30,14 @@ class FindInPageBar: UIView {
 
     var currentResult = 0 {
         didSet {
+            Profiler.end(bookend: .find_in_page)
             matchCountView.text = "\(currentResult)/\(totalResults)"
         }
     }
 
     var totalResults = 0 {
         didSet {
+            Profiler.end(bookend: .find_in_page)
             matchCountView.text = "\(currentResult)/\(totalResults)"
             previousButton.isEnabled = totalResults > 1
             nextButton.isEnabled = previousButton.isEnabled
@@ -47,6 +50,7 @@ class FindInPageBar: UIView {
         }
 
         set {
+            Profiler.begin(bookend: .find_in_page)
             searchText.text = newValue
             SELdidTextChange(searchText)
         }
